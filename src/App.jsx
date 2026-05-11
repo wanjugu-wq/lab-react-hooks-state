@@ -7,15 +7,18 @@ const App = () => {
   // TODO: Implement state for dark mode toggle
   const [darkMode, setIsDarkMode] = useState(false);
   // TODO: Implement state for cart management
-  const [cart, setCart] = useState([]);
+  const [cart, setIsCart] = useState([]);
   // TODO: Implement state for category filtering
   const [categoryFilter, setCategoryFilter] = useState("all");
 
+  function handleCart(product) {
+    return setIsCart((prev)=>[...prev,product])
+  }
 
   return (
     <div>
-      <h1>🛒 Shopping App</h1> 
-      <DarkModeToggle/>
+      <h1>🛒 Shopping App</h1>
+      <DarkModeToggle />
       <p>
         Welcome! Your task is to implement filtering, cart management, and dark
         mode.
@@ -29,7 +32,8 @@ const App = () => {
         <option value="Dairy">Dairy</option>
       </select>
 
-      <ProductList />
+      <Cart cart={cart} /> 
+      <ProductList handleCart={handleCart}/>
 
       {/* TODO: Implement and render Cart component */}
     </div>
