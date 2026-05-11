@@ -7,19 +7,25 @@ export const sampleProducts = [
   { id: 2, name: "Milk", price: "$2.50", category: "Dairy", inStock: false },
 ];
 
-const ProductList = ({handleCart}) => {
+const ProductList = ({ handleCart, categoryFilter }) => {
+  const filteredProducts =
+    categoryFilter === "all"
+      ? sampleProducts
+      : sampleProducts.filter((product) => product.category === categoryFilter);
   return (
     <div>
       <h2>Available Products</h2>
-
-      {/* TODO: Filter sample data using selected category */}
-      {sampleProducts.map((product) => (
-        <ProductCard
-          key={product.id}
-          product={product}
-          handleCart={handleCart}
-        />
-      ))}
+      {filteredProducts.length === 0 ? (
+        <p>No products available</p>
+      ) : (
+        filteredProducts.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            handleCart={handleCart}
+          />
+        ))
+      )}
     </div>
   );
 };
